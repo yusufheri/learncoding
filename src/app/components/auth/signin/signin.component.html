@@ -1,0 +1,37 @@
+<section id="login" class="mb-5 mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-4 mx-auto">
+        <div class="card_login">
+          <div class="card">
+            <div class="card-body text-center">
+              <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+                <h1 class="h3 mb-3 font-weight-normal" *ngIf="!isError">Login</h1>
+                <div class="alert alert-danger" role="alert" *ngIf="isError">
+                  <b>Something is wrong!</b>
+                  <p>{{ errorMessage }}</p>
+                </div>
+                <div class="form-group">
+                  <input type="email" id="email" name="email" class="form-control" placeholder="Email"
+                    formControlName="email">
+                </div>
+                <div class="form-group">
+                  <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                    formControlName="password">
+                </div>
+                <button type="submit" [disabled]="signinForm.invalid"
+                  class="btn btn-lg btn-danger btn-block">Login</button>
+                <div class="form-group" style="margin-top: 20px;">
+                  <span style="float:left;"><a routerLink="/auth/signup" class="login-user">New account
+                      ?</a></span>
+                  <span style="float:right;"><a routerLink="/auth/lost-password" class="login-user">Lost password
+                      ?</a></span>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

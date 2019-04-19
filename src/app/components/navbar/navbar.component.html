@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-danger">
+  <a class="navbar-brand" routerLink="/">{{app_name}}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar"
+    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="mainNavbar">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngIf="isLogged">
+        <a class="nav-link" routerLink="/offers">Offers
+        </a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" *ngIf="!isAuth">
+        <a class="nav-link btn btn-default" routerLink="/auth/signup">New account
+        </a>
+      </li>
+      <li class="nav-item " *ngIf="!isAuth" style="margin-left: 10px;">
+        <a class="nav-link btn btn-default" routerLink="/auth/signin">Sign in
+        </a>
+      </li>
+      <li class="nav-item avatar" *ngIf="isAuth">
+          <a class="nav-link" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
+              alt="avatar image" height="40">
+          </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+            <a class="dropdown-item btn btn-default" routerLink="auth/profile"><i class="fa fa-user"></i> My profile</a>
+            <a class="dropdown-item btn btn-default" routerLink="/admin/list-books"><i class="fa fa-user"></i> My tweets</a>
+            <a class="dropdown-item btn btn-default" href="#" (click)="onSignOut()"><i class="fa fa-lock"></i> Log out</a>
+          </div>
+        </li>
+    </ul>
+  </div>
+</nav>
+<app-hero></app-hero>
