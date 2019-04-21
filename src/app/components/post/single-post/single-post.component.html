@@ -1,0 +1,23 @@
+<div class="row d-flex justify-content-center">
+  <div class="col-9">
+    <div class="card mb-3 ml-3">
+      <img class="card-img-top" src="{{post.photo}}">
+      <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <p class="card-text">{{post.description}}</p>
+        <p class="card-text">
+          <span [ngClass]="{'badge':true}">{{ post.category }}</span>
+          
+                <span class="btn btn-danger float-right btn-sm" style="margin-left: 15px;" >{{ post.dislikes }} <i class="fa fa-thumbs-down" style="font-weight: 500"></i></span>
+            <span class="btn btn-success float-right btn-sm"  >{{ post.likes }} <i class="fa fa-thumbs-up"></i></span>                       
+        </p>
+      </div>
+      <div class="card-footer">
+         <span class="badge ">Edit by {{post.user.username}}</span>
+         <a routerLink="auth/profile"><img src="{{post.user.photo}}" height="50px" width="75px"></a>
+         <button class="btn btn-danger" style="float:right;" (click)="onBack()">Go back</button>
+      </div>
+    </div>
+  </div>
+</div>
+

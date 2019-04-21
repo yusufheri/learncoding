@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import * as firebase from "firebase";
 import { AuthService } from "src/app/services/auth.service";
 import { User } from "src/app/models/user.model";
+import * as Cookies from 'es-cookie';
+
 
 @Component({
   selector: "app-navbar",
@@ -9,21 +11,21 @@ import { User } from "src/app/models/user.model";
   styleUrls: ["./navbar.component.scss"]
 })
 export class NavbarComponent implements OnInit {
-  app_name: string = "LearnCoding";
+  app_name: string = 'LearnCoding';
   isAuth: boolean;
-  currentUser: User;
+  user: User;
+ 
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.isAuth = true;     
-        this.currentUser = this.authService.users.filter(elt => elt.email === user.email)[0];
-        console.log(this.authService.users.length);
+        this.isAuth = true;
+        this.user = this.authService.getCurrentUser();
+        // console.log(this.user);
       } else {
         this.isAuth = false;
-        this.currentUser = null;
       }
     });
   }

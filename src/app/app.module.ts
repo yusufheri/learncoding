@@ -1,6 +1,8 @@
+import { PostsService } from './services/posts.service';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -13,6 +15,13 @@ import { ItemPostComponent } from "./components/post/item-post/item-post.compone
 import { ListPostComponent } from "./components/post/list-post/list-post.component";
 import { HeroComponent } from "./components/navbar/hero/hero.component";
 import { FooterComponent } from "./components/footer/footer.component";
+import { AuthService } from "./services/auth.service";
+import { PostFormComponent } from './components/post/post-form/post-form.component';
+import { SinglePostComponent } from './components/post/single-post/single-post.component';
+
+import { TruncateTextPipe } from './pipes/truncate-text.pipe';
+import { AuthGuardService } from './services/auth-guard.service';
+
 
 @NgModule({
   declarations: [
@@ -25,10 +34,13 @@ import { FooterComponent } from "./components/footer/footer.component";
     ItemPostComponent,
     ListPostComponent,
     HeroComponent,
-    FooterComponent
+    FooterComponent,
+    PostFormComponent,
+    SinglePostComponent,
+    TruncateTextPipe
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],  
+  providers: [AuthService, PostsService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

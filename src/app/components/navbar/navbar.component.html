@@ -24,13 +24,13 @@
       <li class="nav-item avatar" *ngIf="isAuth">
           <a class="nav-link" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
-              alt="avatar image" height="40">
+            <img src="{{user.photo}}" class="rounded-circle z-depth-0"
+              alt="avatar image" height="40"> {{user.username|uppercase}}
           </a>
-          <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-            <a class="dropdown-item btn btn-default" routerLink="auth/profile"><i class="fa fa-user"></i> My profile</a>
-            <a class="dropdown-item btn btn-default" routerLink="/admin/list-books"><i class="fa fa-user"></i> My tweets</a>
-            <a class="dropdown-item btn btn-default" href="#" (click)="onSignOut()"><i class="fa fa-lock"></i> Log out</a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-danger" aria-labelledby="navbarDropdownMenuLink-4">
+            <a class="dropdown-item btn btn-default" routerLink="auth/profile"><i class="fa fa-user"></i> Profile</a>
+            <a class="dropdown-item btn btn-default" routerLink="/posts/new"><i class="fa fa-share-alt"></i> New post</a>
+            <a class="dropdown-item btn btn-default" href="" (click)="onSignOut()"><i class="fa fa-lock"></i> Log out</a>
           </div>
         </li>
     </ul>

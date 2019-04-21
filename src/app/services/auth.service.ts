@@ -1,21 +1,40 @@
-import { Injectable } from "@angular/core";
-import * as firebase from "firebase";
+import { Injectable, ɵConsole } from '@angular/core';
+import * as firebase from 'firebase';
 import { User } from "../models/user.model";
 import { Subject } from "rxjs";
-import "firebase/database";
-import "firebase/storage";
+import 'firebase/database';
+import 'firebase/storage';
 import DataSnapshot = firebase.database.DataSnapshot;
+import { isNullOrUndefined } from "util";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
+  current_user: User;
   users: User[] = [];
-  userSubject = new Subject<User[]>();
-  constructor() {}
+  userSubject = new Subject<User[]>(); 
+
+  constructor() { 
+  }
 
   emitUsers() {
     this.userSubject.next(this.users);
+  }
+
+  setUser(user: User): void {
+    let user_string = JSON.stringify(user);
+    localStorage.setItem("currentUser", user_string);
+  }
+
+  getCurrentUser(): User {
+    let user_string = localStorage.getItem("currentUser");
+    if (!isNullOrUndefined(user_string)) {
+      let user: User = JSON.parse(user_string);
+      return user;
+    } else {
+      return null;
+    }
   }
 
   saveUsers() {
@@ -25,16 +44,18 @@ export class AuthService {
       .set(this.users);
   }
 
-  getUsers(){
-    console.log("Début opération")
+  getUsers(email){
     firebase
       .database()
       .ref("/users")
       .on("value", (data: DataSnapshot) => {
         this.users = data.val() ? data.val() : [];
+        const tab = this.users.filter(elt => elt.email === email);
+        if (tab.length == 1) {
+          this.setUser(tab[0]);
+         }
         this.emitUsers();
       });
-       console.log("Fin opération")
   }
 
   getUser(id: number) {
@@ -79,7 +100,8 @@ export class AuthService {
         .signInWithEmailAndPassword(email, password)
         .then(
           () => {
-            resolve();            
+            resolve();  
+            this.getUsers(email);
           },
           error => {
             reject(error);
@@ -106,6 +128,7 @@ export class AuthService {
 
   signOutUser() {
     firebase.auth().signOut();
+    localStorage.removeItem("user");
   }
 
   uploadFile(file: File) {

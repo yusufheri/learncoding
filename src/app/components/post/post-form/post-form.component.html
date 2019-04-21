@@ -1,0 +1,49 @@
+<section id="register" class="mb-5 mt-5">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-12 col-md-4 mx-auto">
+        <div class="card_register">
+          <div class="card">
+            <div class="card-body text-center">
+
+              <form [formGroup]="postForm" (ngSubmit)="onSavePost()">
+                <h1 class="h3 mb-3 font-weight-normal">New post</h1>
+                <div class="alert alert-danger" role="alert" *ngIf="isError">
+                  <b>Something is wrong!</b>
+                  <p>{{ errorMessage }}</p>
+                </div>
+                <div class="form-group">
+                  <input type="text" name="title" class="form-control" placeholder="title" formControlName="title">
+                </div>
+
+                <div class="form-group">
+                  <select class="form-control" name="category" formControlName="category">
+                    <option value="Angular 7 & Firebase">Angular 7 & Firebase</option>
+                    <option value="Symfony 4">Symfony 4</option>
+                    <option value="Ionic 4">Ionic 4</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <textarea id="description" class="form-control" formControlName="description" placeholder="description">
+                  </textarea>
+                </div>
+                <div class="form-group">
+                  <input type="file" (change)="detectFiles($event)" class="form-control" accept="image/*">
+                  <p class="text-success" *ngIf="fileUploaded">Uploaded !</p>
+                </div>
+
+                <button type="submit" class="btn btn-lg btn-danger btn-block"
+                  [disabled]="postForm.invalid">Post now</button>
+                <div class="form-group">
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,1 +1,17 @@
-<p>Salut le monde</p>
+<div class="card">
+    <img class="card-img-top" src="{{ post.photo }}" height="200px">
+    <div class="card-block">
+        <h4 class="card-title mt-1" (click)="onViewPost(id)">{{ post.title }}</h4>
+        <div class="card-tex" [ngStyle]="{color: getColor()}">
+           {{ post.description | truncateText:20}}
+        </div>
+    </div>
+    <div class="card-footer">
+        <span [ngClass]="{'badge':true,
+         'badge-success': post.likes >= post.dislikes,
+         'badge-danger': post.dislikes > post.likes}">{{ post.category }}</span>
+       
+            <span class="btn btn-danger float-right btn-sm" style="margin-left: 15px;cursor:pointer;" (click)="onDisliked()">{{ post.dislikes }} <i class="fa fa-thumbs-down" style="font-weight: 500"></i></span>
+        <span class="btn btn-success float-right btn-sm" style="cursor:pointer;" (click)="onLiked()">{{ post.likes }} <i class="fa fa-thumbs-up"></i></span>                        
+    </div>
+</div>

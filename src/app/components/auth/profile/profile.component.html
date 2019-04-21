@@ -1,4 +1,4 @@
-<section id="profile" class="container">
+<section id="profile" class="container profile-sidebar">
   <div class="row mt-5">
     <div class="offset-lg-4 col-lg-4 col-sm-6 col-12 main-section text-center card">
       <div class="row">
@@ -6,17 +6,16 @@
       </div>
       <div class="row user-details">
         <div class="col-12">
-          <!--
-
          
-          <img src="../../../../assets/check-user.png" class="rounded-circle img-thumbnail" alt="profile">
+          <img src="{{user.photo}}" class="rounded-circle img-thumbnail" alt="{{user.skills}}">
           <h5>{{user.name}}</h5>
           <p>
+            <span style="font-weight:bold;font-size:20px;">{{user.username}}</span><br>
             {{user.email}}
           </p>
-           -->
+            
           <hr>
-          <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores suscipit itaque minima quae.</span>
+          <span>{{user.skills}}</span>
         </div>
       </div>
     </div>
