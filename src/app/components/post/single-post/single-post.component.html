@@ -9,7 +9,9 @@
           <span [ngClass]="{'badge':true}">{{ post.category }}</span>
           
                 <span class="btn btn-danger float-right btn-sm" style="margin-left: 15px;" >{{ post.dislikes }} <i class="fa fa-thumbs-down" style="font-weight: 500"></i></span>
-            <span class="btn btn-success float-right btn-sm"  >{{ post.likes }} <i class="fa fa-thumbs-up"></i></span>                       
+            <span class="btn btn-success float-right btn-sm"  >{{ post.likes }} <i class="fa fa-thumbs-up"></i></span>        
+            <br>
+            <small style="margin-top: 40px; size:20px;"><a href="{{post.source}}" target="_blank">Source</a></small>               
         </p>
       </div>
       <div class="card-footer">

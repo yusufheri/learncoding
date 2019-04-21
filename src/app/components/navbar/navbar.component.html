@@ -22,9 +22,10 @@
               alt="avatar image" height="40"> {{user.username|uppercase}}
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-danger" aria-labelledby="navbarDropdownMenuLink-4">
-            <a class="dropdown-item btn btn-default" routerLink="auth/profile"><i class="fa fa-user"></i> Profile</a>
-            <a class="dropdown-item btn btn-default" routerLink="/posts/new"><i class="fa fa-share-alt"></i> New post</a>
-            <a class="dropdown-item btn btn-default" href="" (click)="onSignOut()"><i class="fa fa-lock"></i> Log out</a>
+            <a class="dropdown-item btn btn-danger" routerLink="auth/profile"><i class="fa fa-user"></i> Profile</a>
+            <a class="dropdown-item btn btn-danger" routerLink="admin/posts"><i class="fa fa-share-alt"></i> My pots 
+              <span class="badge badge-danger">{{ posts_count }}</span></a>
+            <a class="dropdown-item btn btn-danger" href="" (click)="onSignOut()"><i class="fa fa-lock"></i> Log out</a>
           </div>
         </li>
     </ul>

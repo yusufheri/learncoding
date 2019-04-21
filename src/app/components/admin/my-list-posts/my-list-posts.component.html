@@ -1,0 +1,24 @@
+<div class="container m-20">
+  <div class="row"><button style="float:right;" class="btn btn-danger" (click)='onNewPost()'> New post </button></div>
+  <div class="row">
+    <h5>My potst</h5>
+    <table class="table table-striped">
+      <thead>
+        <th>N°</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of posts, let i = index">
+          <td>{{ i }}</td>
+          <td>{{ post.title }}</td>
+          <td>{{ post.description | truncateText:25}}</td>
+          <td><button class="btn btn-danger" (click)="onDelete(post)">delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

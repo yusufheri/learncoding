@@ -21,6 +21,7 @@ import { SinglePostComponent } from './components/post/single-post/single-post.c
 
 import { TruncateTextPipe } from './pipes/truncate-text.pipe';
 import { AuthGuardService } from './services/auth-guard.service';
+import { MyListPostsComponent } from './components/admin/my-list-posts/my-list-posts.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AuthGuardService } from './services/auth-guard.service';
     FooterComponent,
     PostFormComponent,
     SinglePostComponent,
-    TruncateTextPipe
+    TruncateTextPipe,
+    MyListPostsComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],  
   providers: [AuthService, PostsService, AuthGuardService],

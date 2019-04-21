@@ -11,9 +11,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./list-post.component.scss']
 })
 export class ListPostComponent implements OnInit, OnDestroy {
-  ngOnDestroy(): void {
-   this.postsSubcription.unsubscribe();
-  }
+ 
   posts: Post[];
   postsSubcription: Subscription;
 
@@ -28,6 +26,10 @@ export class ListPostComponent implements OnInit, OnDestroy {
     );
     this.postService.emitPosts();
     this.user = this.authService.getCurrentUser();
+  }
+
+  ngOnDestroy(): void {
+    this.postsSubcription.unsubscribe();
   }
 
 }

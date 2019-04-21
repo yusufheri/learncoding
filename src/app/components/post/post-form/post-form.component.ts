@@ -33,17 +33,20 @@ export class PostFormComponent implements OnInit {
     this.postForm = this.formBuilder.group({
       title: ['', [ Validators.required, Validators.minLength(10)] ],
       category: ["Angular 7 & Firebase", Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      source: ''
     });
   }
 
   onSavePost() {
     const title = this.postForm.value['title'];
     const category = this.postForm.value['category'];
+    const source = this.postForm.value['source'];
     const description = this.postForm.value['description'];
     const user = this.authService.getCurrentUser();
 
     const post: Post = new Post(title, description, category, user);
+    post.source = source;
       
     if (this.fileUrl && this.fileUrl !== "") {
       post.photo = this.fileUrl;

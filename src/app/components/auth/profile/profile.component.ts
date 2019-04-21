@@ -15,8 +15,8 @@ count_post: number;
 
   ngOnInit() {
     this.user = this.authService.getCurrentUser();
-    const postUser = this.postService.posts.filter(element => element.user.email = this.user.email);
-    this.count_post = postUser.length;
+    
+    //this.count_post = postUser.length;
   }
 
 }

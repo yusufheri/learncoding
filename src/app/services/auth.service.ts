@@ -11,9 +11,10 @@ import { isNullOrUndefined } from "util";
   providedIn: "root"
 })
 export class AuthService {
-  current_user: User;
+  current_user: User; 
   users: User[] = [];
   userSubject = new Subject<User[]>(); 
+  current_userSubject = new Subject<User>();
 
   constructor() { 
      this.getUsers('');
@@ -21,6 +22,10 @@ export class AuthService {
 
   emitUsers() {
     this.userSubject.next(this.users);
+  }
+
+  emitCurrentUser() {
+    this.current_userSubject.next(this.current_user);
   }
 
   setUser(user: User): void {

@@ -6,6 +6,7 @@ import { User } from "../models/user.model";
 import 'firebase/database';
 import 'firebase/storage';
 import DataSnapshot = firebase.database.DataSnapshot;
+import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,25 +14,33 @@ import DataSnapshot = firebase.database.DataSnapshot;
 export class PostsService {
 posts: Post[]  = [];
 postsSubject = new Subject<Post[]>();
+count_postSubject = new Subject<any>();
+count_post_user : number;
 
-emitPosts() {
-  this.postsSubject.next(this.posts);
-}
-  constructor() {this.getPosts(''); }
 
+  constructor(private auth : AuthService) {this.getPosts(''); }
+
+  emitPosts() {
+  this.postsSubject.next(this.posts);  
+  }
+
+  emitCountPostUser() {
+    this.count_postSubject.next(this.count_post_user);
+  }
+  
   likedPost(post: Post){
     this.posts.filter(elt => elt==post)[0].likes++;
-    this.saveUsers();
+    this.savePosts();
     this.emitPosts();
   }
 
   disLikedPost(post: Post){
     this.posts.filter(elt => elt==post)[0].dislikes++;
-    this.saveUsers();
+    this.savePosts();
     this.emitPosts();
   }
   
-  saveUsers() {
+  savePosts() {
     firebase
       .database()
       .ref("/posts")
@@ -44,7 +53,11 @@ emitPosts() {
       .ref("/posts")
       .on("value", (data: DataSnapshot) => {
         this.posts = data.val() ? data.val() : [];
+        const user_current = this.auth.getCurrentUser();
+        this.count_post_user = this.posts.filter(elt => elt.idUser == user_current.id).length; 
+        this.emitCountPostUser();       
         this.emitPosts();
+        
       });
   }
 
@@ -94,9 +107,36 @@ emitPosts() {
   }
 
   createNewPost(post: Post) {
+   
     this.posts.push(post);
-    this.saveUsers();
+    this.savePosts();
     this.emitPosts();
+    this.emitCountPostUser();
+  }
+
+  removePost(post: Post) {
+
+    if(post.photo) {
+      const storageRef = firebase.storage().refFromURL(post.photo);
+      storageRef.delete().then(
+        () => {
+          console.log("File removed !!");
+        }, error => {
+          console.error('Could not to remove file: ' + error);
+        }
+      );
+    }
+
+    const postIndexRemove = this.posts.findIndex(postItem => {
+      if (postItem === post) {
+        return true;
+      }
+    });
+
+    this.posts.splice(postIndexRemove, 1);
+    this.savePosts();
+    this.emitPosts();
+    this.emitCountPostUser();
   }
 
 }
