@@ -16,6 +16,7 @@ export class AuthService {
   userSubject = new Subject<User[]>(); 
 
   constructor() { 
+     this.getUsers('');
   }
 
   emitUsers() {
@@ -23,8 +24,10 @@ export class AuthService {
   }
 
   setUser(user: User): void {
-    let user_string = JSON.stringify(user);
-    localStorage.setItem("currentUser", user_string);
+    if (user != undefined) {
+      let user_string = JSON.stringify(user);
+      localStorage.setItem("currentUser", user_string);
+    }    
   }
 
   getCurrentUser(): User {
@@ -50,9 +53,11 @@ export class AuthService {
       .ref("/users")
       .on("value", (data: DataSnapshot) => {
         this.users = data.val() ? data.val() : [];
-        const tab = this.users.filter(elt => elt.email === email);
+        const tab = this.users.filter(elt => elt.email == email);
         if (tab.length == 1) {
           this.setUser(tab[0]);
+         } else {
+           this.setUser(null);
          }
         this.emitUsers();
       });
@@ -81,10 +86,16 @@ export class AuthService {
         .auth()
         .createUserWithEmailAndPassword(user.email, user.password)
         .then(
-          () => {
-            resolve();
+          () => {           
             this.users.push(user);
             this.saveUsers();
+            const tab = this.users.filter(elt => elt.email == user.email);
+            if (tab.length == 1) {
+              this.setUser(tab[0]);
+            } else {
+              this.setUser(null);
+            }
+             resolve();
           },
           error => {
             reject(error);
@@ -127,8 +138,8 @@ export class AuthService {
   }
 
   signOutUser() {
-    firebase.auth().signOut();
     localStorage.removeItem("user");
+    firebase.auth().signOut();   
   }
 
   uploadFile(file: File) {

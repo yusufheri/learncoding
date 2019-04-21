@@ -3,7 +3,7 @@
     <div class="card-block">
         <h4 class="card-title mt-1" (click)="onViewPost(id)">{{ post.title }}</h4>
         <div class="card-tex" [ngStyle]="{color: getColor()}">
-           {{ post.description | truncateText:20}}
+           {{ post.description | truncateText:25}}
         </div>
     </div>
     <div class="card-footer">
