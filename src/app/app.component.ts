@@ -9,12 +9,12 @@ import * as firebase from "firebase";
 export class AppComponent {
   constructor() {
     var config = {
-      apiKey: "AIzaSyBVedouziGufaGjnE9nj5F5C6xO-ZMfsns",
-      authDomain: "learncoding-fa791.firebaseapp.com",
-      databaseURL: "https://learncoding-fa791.firebaseio.com",
-      projectId: "learncoding-fa791",
-      storageBucket: "learncoding-fa791.appspot.com",
-      messagingSenderId: "342519972542"
+      apiKey: "",
+      authDomain: "",
+      databaseURL: "",
+      projectId: "",
+      storageBucket: "",
+      messagingSenderId: ""
     };
     firebase.initializeApp(config);
   }
