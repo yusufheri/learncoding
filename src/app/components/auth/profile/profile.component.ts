@@ -17,7 +17,6 @@ count_post: number;
     this.user = this.authService.getCurrentUser();
     const postUser = this.postService.posts.filter(element => element.user.email = this.user.email);
     this.count_post = postUser.length;
-    console.log(this.count_post);
   }
 
 }

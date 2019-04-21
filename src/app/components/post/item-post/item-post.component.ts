@@ -29,7 +29,7 @@ export class ItemPostComponent implements OnInit {
 
   onLiked() {
     if(this.canLike) {
-       this.post.likes ++;
+       this.postService.likedPost(this.post);
     } else {
       this.router.navigate(["/auth", "signin"]);
     }
@@ -38,7 +38,7 @@ export class ItemPostComponent implements OnInit {
 
   onDisliked() {
     if(this.canLike) {
-      this.post.dislikes ++;
+      this.postService.disLikedPost(this.post);
     } else {
       this.router.navigate(["/auth", "signin"]);
     }    

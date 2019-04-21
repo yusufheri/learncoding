@@ -18,6 +18,18 @@ emitPosts() {
   this.postsSubject.next(this.posts);
 }
   constructor() {this.getPosts(''); }
+
+  likedPost(post: Post){
+    this.posts.filter(elt => elt==post)[0].likes++;
+    this.saveUsers();
+    this.emitPosts();
+  }
+
+  disLikedPost(post: Post){
+    this.posts.filter(elt => elt==post)[0].dislikes++;
+    this.saveUsers();
+    this.emitPosts();
+  }
   
   saveUsers() {
     firebase
